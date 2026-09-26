@@ -669,14 +669,73 @@ const semesters = [
     "Semester 8"
 ];
 
-const courses = [
-    "Course 1",
-    "Course 2",
-    "Course 3",
-    "Course 4",
-    "Course 5"
-];
+const semesterCourses = {
 
+    "Semester 1": [
+        ["BCC 101", "Introduction to Business"],
+        ["BCC 102", "Basic Accounting"],
+        ["BCC 103", "Business Mathematics"],
+        ["BCC 104", "Principles of Management"],
+        ["BCC 105", "Business Communication"]
+    ],
+
+    "Semester 2": [
+        ["BCC 106", "Principles of Marketing"],
+        ["BCC 107", "Microeconomics"],
+        ["BCC 108", "Business Statistics"],
+        ["BCC 109", "Business Law"],
+        ["BCC 110", "Information Technology in Business"]
+    ],
+
+    "Semester 3": [
+        ["BCC 201", "Business Finance"],
+        ["BCC 202", "Human Resource Management"],
+        ["BCC 203", "Principles of Banking"],
+        ["BCC 204", "Macroeconomics"],
+        ["BCC 205", "Theory and Practices of Taxation"]
+    ],
+
+    "Semester 4": [
+        ["BCC 206", "Insurance and Risk Management"],
+        ["BCC 207", "Business Ethics"],
+        ["BCC 208", "Entrepreneurship Development"],
+        ["BCC 209", "Organizational Behavior"],
+        ["BCC 210", "Bangladesh Studies and Economic Development"]
+    ],
+
+    "Semester 5": [
+        ["MGT 301", "Managerial Accounting"],
+        ["MGT 302", "Seminars in Management"],
+        ["MGT 303", "Service Management"],
+        ["MGT 304", "Small Business Management"],
+        ["MGT 305", "Management Information System"]
+    ],
+
+    "Semester 6": [
+        ["MGT 306", "Operations Management"],
+        ["MGT 307", "Managerial Economics"],
+        ["MGT 308", "E-Business Management"],
+        ["MGT 309", "Management of Change"],
+        ["MGT 310", "Foreign Trade Management"]
+    ],
+
+    "Semester 7": [
+        ["MGT 401", "Quality Management"],
+        ["MGT 402", "Management Science"],
+        ["MGT 403", "Leadership"],
+        ["MGT 404", "Project Management"],
+        ["MGT 405", "Business Environment"]
+    ],
+
+    "Semester 8": [
+        ["MGT 406", "Supply Chain Management"],
+        ["MGT 407", "Industrial Relations & Labor Law"],
+        ["MGT 408", "Business Research Methods"],
+        ["MGT 409", "Sustainability Management"],
+        ["MGT 410", "Strategic Management"]
+    ]
+
+};
 const resources = [
     {
         name:"Syllabus",
@@ -779,44 +838,49 @@ semesters.forEach((semester,index)=>{
 
 function openSemester(index){
 
-    document.getElementById("coursePageTitle").textContent =
-        semesters[index];
+    const semester = semesters[index];
 
-    const courseList=document.getElementById("courseList");
+    document.getElementById("coursePageTitle").textContent = semester;
 
-    courseList.innerHTML="";
+    const courseList = document.getElementById("courseList");
 
-    courses.forEach((course,courseIndex)=>{
+    courseList.innerHTML = "";
 
-        const item=document.createElement("div");
+    const coursesForSemester = semesterCourses[semester] || [];
 
-        item.className="list-item";
+    coursesForSemester.forEach((course)=>{
 
-        item.onclick=()=>{
+        const courseCode = course[0];
+        const courseName = course[1];
+
+        const item = document.createElement("div");
+
+        item.className = "list-item";
+
+        item.onclick = () => {
             openCourse(
-                semesters[index],
-                course
+                semester,
+                courseName
             );
         };
 
-        item.innerHTML=`
+        item.innerHTML = `
             <div class="item-icon">📚</div>
 
             <div class="item-content">
-                <h3>${course}</h3>
-                <p>${semesters[index]}</p>
+                <h3>${courseCode}</h3>
+                <p>${courseName}</p>
             </div>
 
             <div class="arrow">›</div>
         `;
 
         courseList.appendChild(item);
+
     });
 
     showPage("courses");
 }
-
-
 /* =========================
    RESOURCES
 ========================= */
