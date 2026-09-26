@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#f5f7fb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<title>MGT38 – Study Companion</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#f5f7fb;
+    color:#111827;
+    min-height:100vh;
+}
+
+button{
+    font-family:inherit;
+}
+
+.app{
+    max-width:700px;
+    margin:auto;
+    min-height:100vh;
+    padding-bottom:90px;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:24px 20px 10px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:58px;
+    height:58px;
+    border-radius:18px;
+    background:#111b22;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    font-weight:800;
+}
+
+.brand h1{
+    font-size:26px;
+    line-height:1.1;
+}
+
+.brand p{
+    color:#9aa0a8;
+    font-size:15px;
+    margin-top:4px;
+}
+
+.bell{
+    font-size:28px;
+    color:#555b63;
+}
+
+/* PAGE */
+.page{
+    display:none;
+    padding:15px 20px 30px;
+}
+
+.page.active{
+    display:block;
+}
+
+.greeting{
+    margin-top:30px;
+}
+
+.greeting h2{
+    font-size:42px;
+    line-height:1.1;
+    letter-spacing:-1.5px;
+}
+
+.greeting p{
+    margin-top:12px;
+    font-size:19px;
+    color:#9a9da3;
+}
+
+/* HERO */
+.hero{
+    margin-top:28px;
+    padding:30px 40px;
+    border-radius:32px;
+    color:white;
+    background:linear-gradient(135deg,#204b82,#2d65a9);
+}
+
+.hero-small{
+    font-size:17px;
+    opacity:.85;
+}
+
+.hero h3{
+    font-size:32px;
+    margin:10px 0 14px;
+}
+
+.hero p{
+    font-size:17px;
+    opacity:.85;
+}
+
+/* SECTION */
+.section-title{
+    margin-top:42px;
+    margin-bottom:18px;
+    font-size:28px;
+    font-weight:750;
+}
+
+/* QUICK ACCESS */
+.quick-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.quick-card{
+    background:white;
+    border-radius:28px;
+    min-height:170px;
+    padding:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.025);
+    cursor:pointer;
+    transition:.15s;
+}
+
+.quick-card:active{
+    transform:scale(.97);
+}
+
+.quick-icon{
+    font-size:39px;
+    margin-bottom:25px;
+    color:#214d84;
+}
+
+.quick-card h3{
+    font-size:20px;
+}
+
+.quick-card p{
+    color:#9da0a5;
+    margin-top:5px;
+    font-size:17px;
+}
+
+/* PAGE HEADERS */
+.page-title{
+    font-size:40px;
+    letter-spacing:-1px;
+    margin-top:10px;
+}
+
+.page-subtitle{
+    margin-top:10px;
+    font-size:18px;
+    color:#999da4;
+}
+
+/* LIST */
+.list{
+    margin-top:28px;
+}
+
+.list-item{
+    background:#f9fafe;
+    border-radius:22px;
+    padding:23px 20px;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:17px;
+    cursor:pointer;
+    border:1px solid rgba(0,0,0,.015);
+}
+
+.list-item:active{
+    background:#edf2fa;
+}
+
+.item-icon{
+    width:44px;
+    height:44px;
+    border-radius:13px;
+    background:#e9f0fa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    color:#204d83;
+    flex-shrink:0;
+}
+
+.item-content{
+    flex:1;
+}
+
+.item-content h3{
+    font-size:19px;
+}
+
+.item-content p{
+    margin-top:4px;
+    color:#9a9da4;
+    font-size:14px;
+}
+
+.arrow{
+    font-size:27px;
+    color:#555b61;
+}
+
+/* COURSE */
+.back{
+    border:0;
+    background:none;
+    font-size:29px;
+    padding:5px 0;
+    color:#222;
+    cursor:pointer;
+}
+
+.resource{
+    background:white;
+    border-radius:22px;
+    padding:21px;
+    margin-bottom:13px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    box-shadow:0 2px 7px rgba(0,0,0,.025);
+    cursor:pointer;
+}
+
+.resource-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    background:#e8f0fc;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.resource-text{
+    flex:1;
+}
+
+.resource-text h3{
+    font-size:18px;
+}
+
+.resource-text p{
+    font-size:14px;
+    color:#999da4;
+    margin-top:4px;
+}
+
+.resource-arrow{
+    font-size:24px;
+    color:#555;
+}
+
+/* ASSIGNMENT */
+.assignment{
+    background:white;
+    border-radius:25px;
+    padding:24px;
+    margin-top:22px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.assignment-tag{
+    display:inline-block;
+    background:#e9f1ff;
+    color:#20528d;
+    padding:7px 12px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.assignment h3{
+    font-size:22px;
+    margin-top:14px;
+}
+
+.assignment p{
+    color:#777d85;
+    margin-top:9px;
+    line-height:1.5;
+}
+
+.due{
+    margin-top:17px;
+    padding-top:15px;
+    border-top:1px solid #eee;
+    font-weight:600;
+}
+
+/* MORE */
+.more-card{
+    background:white;
+    padding:21px;
+    border-radius:21px;
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    cursor:pointer;
+}
+
+.more-icon{
+    font-size:26px;
+}
+
+.more-card h3{
+    font-size:18px;
+}
+
+.more-card p{
+    color:#999;
+    font-size:14px;
+    margin-top:4px;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    max-width:700px;
+    margin:auto;
+    height:82px;
+    background:rgba(238,240,245,.96);
+    backdrop-filter:blur(15px);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    padding:8px 8px 10px;
+    z-index:100;
+}
+
+.nav-btn{
+    border:0;
+    background:none;
+    color:#555a62;
+    border-radius:28px;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.nav-btn .nav-icon{
+    font-size:25px;
+    display:block;
+    margin-bottom:3px;
+}
+
+.nav-btn.active{
+    background:#dce7ff;
+    color:#263d65;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:100px;
+    transform:translateX(-50%) translateY(20px);
+    background:#25282d;
+    color:white;
+    padding:13px 20px;
+    border-radius:14px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:300;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:450px){
+    .greeting h2{
+        font-size:39px;
+    }
+
+    .hero{
+        padding:28px 30px;
+    }
+
+    .hero h3{
+        font-size:28px;
+    }
+
+    .page-title{
+        font-size:36px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+
+        <header class="header">
+            <div class="brand">
+                <div class="logo">MGT38</div>
+                <div>
+                    <h1>MGT38</h1>
+                    <p>Study Companion</p>
+                </div>
+            </div>
+
+            <div class="bell">♧</div>
+        </header>
+
+        <div class="greeting">
+            <h2 id="greeting">Good evening 👋</h2>
+            <p>Ready to continue your study?</p>
+        </div>
+
+        <div class="hero">
+            <div class="hero-small">Same Batch · Same Goals</div>
+            <h3>A Brighter Tomorrow.</h3>
+            <p>Keep learning. Keep progressing.</p>
+        </div>
+
+        <h2 class="section-title">Quick Access</h2>
+
+        <div class="quick-grid">
+
+            <div class="quick-card" onclick="showPage('materials')">
+                <div class="quick-icon">📖</div>
+                <h3>Study</h3>
+                <p>Materials</p>
+            </div>
+
+            <div class="quick-card" onclick="showPage('assignment')">
+                <div class="quick-icon">▣</div>
+                <h3>Assignment</h3>
+                <p>Due dates</p>
+            </div>
+
+            <div class="quick-card" onclick="showPage('materials')">
+                <div class="quick-icon">❓</div>
+                <h3>Questions</h3>
+                <p>Practice</p>
+            </div>
+
+            <div class="quick-card" onclick="showPage('more')">
+                <div class="quick-icon">⌁</div>
+                <h3>More</h3>
+                <p>Explore</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- MATERIALS -->
+    <section id="materials" class="page">
+
+        <h1 class="page-title">Study Materials</h1>
+        <p class="page-subtitle">
+            Choose a semester to explore your resources.
+        </p>
+
+        <div id="semesterList" class="list"></div>
+
+    </section>
+
+
+    <!-- COURSES -->
+    <section id="courses" class="page">
+
+        <button class="back" onclick="showPage('materials')">←</button>
+
+        <h1 id="coursePageTitle" class="page-title">Semester 1</h1>
+
+        <p class="page-subtitle">
+            Choose a course.
+        </p>
+
+        <div id="courseList" class="list"></div>
+
+    </section>
+
+
+    <!-- RESOURCES -->
+    <section id="resources" class="page">
+
+        <button class="back" onclick="showPage('courses')">←</button>
+
+        <h1 id="resourcePageTitle" class="page-title">
+            Course
+        </h1>
+
+        <p class="page-subtitle">
+            Study resources
+        </p>
+
+        <div id="resourceList" class="list"></div>
+
+    </section>
+
+
+    <!-- ASSIGNMENT -->
+    <section id="assignment" class="page">
+
+        <h1 class="page-title">Assignments</h1>
+
+        <p class="page-subtitle">
+            Keep track of your upcoming work.
+        </p>
+
+        <div class="assignment">
+
+            <span class="assignment-tag">Example</span>
+
+            <h3>Assignment information</h3>
+
+            <p>
+                Assignments added by the admin will appear here.
+                You will be able to see instructions, attachments
+                and due dates.
+            </p>
+
+            <div class="due">
+                📅 Due date: Not added yet
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MORE -->
+    <section id="more" class="page">
+
+        <h1 class="page-title">More</h1>
+
+        <p class="page-subtitle">
+            More features and settings.
+        </p>
+
+        <div class="more-card" onclick="showToast('Downloads will be added soon')">
+            <div class="more-icon">↓</div>
+            <div>
+                <h3>Downloads</h3>
+                <p>View your offline files</p>
+            </div>
+        </div>
+
+        <div class="more-card" onclick="showToast('Notifications will be added soon')">
+            <div class="more-icon">🔔</div>
+            <div>
+                <h3>Notifications</h3>
+                <p>Stay updated</p>
+            </div>
+        </div>
+
+        <div class="more-card" onclick="showToast('Update system will be added soon')">
+            <div class="more-icon">↻</div>
+            <div>
+                <h3>Check for Update</h3>
+                <p>Check the latest version</p>
+            </div>
+        </div>
+
+        <div class="more-card" onclick="showToast('MGT38 Study Companion')">
+            <div class="more-icon">ⓘ</div>
+            <div>
+                <h3>About MGT38</h3>
+                <p>Study Companion</p>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+
+    <button class="nav-btn active" data-page="home"
+            onclick="showPage('home')">
+        <span class="nav-icon">⌂</span>
+        Home
+    </button>
+
+    <button class="nav-btn" data-page="materials"
+            onclick="showPage('materials')">
+        <span class="nav-icon">▤</span>
+        Materials
+    </button>
+
+    <button class="nav-btn" data-page="assignment"
+            onclick="showPage('assignment')">
+        <span class="nav-icon">▣</span>
+        Assignment
+    </button>
+
+    <button class="nav-btn" data-page="more"
+            onclick="showPage('more')">
+        <span class="nav-icon">•••</span>
+        More
+    </button>
+
+</nav>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+const semesters = [
+    "Semester 1",
+    "Semester 2",
+    "Semester 3",
+    "Semester 4",
+    "Semester 5",
+    "Semester 6",
+    "Semester 7",
+    "Semester 8"
+];
+
+const courses = [
+    "Course 1",
+    "Course 2",
+    "Course 3",
+    "Course 4",
+    "Course 5"
+];
+
+const resources = [
+    {
+        name:"Syllabus",
+        icon:"📋"
+    },
+    {
+        name:"Question",
+        icon:"❓"
+    },
+    {
+        name:"Slide",
+        icon:"▤"
+    },
+    {
+        name:"CT Questions",
+        icon:"✎"
+    },
+    {
+        name:"Notes",
+        icon:"📝"
+    },
+    {
+        name:"Books",
+        icon:"📚"
+    },
+    {
+        name:"Question Analysis",
+        icon:"📊"
+    }
+];
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(pageId){
+
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
+    });
+
+    const page=document.getElementById(pageId);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav-btn").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    const nav=document.querySelector(
+        `.nav-btn[data-page="${pageId}"]`
+    );
+
+    if(nav){
+        nav.classList.add("active");
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================
+   SEMESTERS
+========================= */
+
+const semesterList=document.getElementById("semesterList");
+
+semesters.forEach((semester,index)=>{
+
+    const item=document.createElement("div");
+
+    item.className="list-item";
+
+    item.onclick=()=>openSemester(index);
+
+    item.innerHTML=`
+        <div class="item-icon">📁</div>
+
+        <div class="item-content">
+            <h3>${semester}</h3>
+            <p>5 courses</p>
+        </div>
+
+        <div class="arrow">›</div>
+    `;
+
+    semesterList.appendChild(item);
+});
+
+
+/* =========================
+   COURSES
+========================= */
+
+function openSemester(index){
+
+    document.getElementById("coursePageTitle").textContent =
+        semesters[index];
+
+    const courseList=document.getElementById("courseList");
+
+    courseList.innerHTML="";
+
+    courses.forEach((course,courseIndex)=>{
+
+        const item=document.createElement("div");
+
+        item.className="list-item";
+
+        item.onclick=()=>{
+            openCourse(
+                semesters[index],
+                course
+            );
+        };
+
+        item.innerHTML=`
+            <div class="item-icon">📚</div>
+
+            <div class="item-content">
+                <h3>${course}</h3>
+                <p>${semesters[index]}</p>
+            </div>
+
+            <div class="arrow">›</div>
+        `;
+
+        courseList.appendChild(item);
+    });
+
+    showPage("courses");
+}
+
+
+/* =========================
+   RESOURCES
+========================= */
+
+function openCourse(semester,course){
+
+    document.getElementById("resourcePageTitle").textContent =
+        course;
+
+    const resourceList=
+        document.getElementById("resourceList");
+
+    resourceList.innerHTML="";
+
+    resources.forEach(resource=>{
+
+        const item=document.createElement("div");
+
+        item.className="resource";
+
+        item.onclick=()=>{
+            showToast(
+                resource.name +
+                " — files will be connected soon"
+            );
+        };
+
+        item.innerHTML=`
+            <div class="resource-icon">
+                ${resource.icon}
+            </div>
+
+            <div class="resource-text">
+                <h3>${resource.name}</h3>
+                <p>${semester} · ${course}</p>
+            </div>
+
+            <div class="resource-arrow">›</div>
+        `;
+
+        resourceList.appendChild(item);
+    });
+
+    showPage("resources");
+}
+
+
+/* =========================
+   GREETING
+========================= */
+
+function updateGreeting(){
+
+    const hour=new Date().getHours();
+
+    let text="Good evening 👋";
+
+    if(hour<12){
+        text="Good morning 👋";
+    }
+    else if(hour<17){
+        text="Good afternoon 👋";
+    }
+
+    document.getElementById("greeting").textContent=text;
+}
+
+updateGreeting();
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2200);
+}
+
+</script>
+
+</body>
+</html>
