@@ -504,22 +504,22 @@ function openCourse(
 ===================================== */
 
 
-function openResource(
-    semester,
-    courseCode,
-    courseName,
-    resourceName
-) {
+function openResource(resourceName) {
 
+    if (
+        currentSemester === "Semester 1" &&
+        currentCourseCode === "BCC 101" &&
+        resourceName === "Syllabus"
+    ) {
+        window.open(
+            "https://drive.google.com/file/d/11NfxjVxTz0BQyoNCDpOLG7KOloxFJDbw/view",
+            "_blank"
+        );
+        return;
+    }
 
-    showToast(
-        resourceName +
-        " files will be connected soon"
-    );
-
-
+    showToast(resourceName + " files will be connected soon");
 }
-
 
 
 /* =====================================
