@@ -17,19 +17,20 @@ const semesters = [
 ];
 
 
-const semesterCourses = {
 
+/* =====================================
+   SEMESTER COURSES
+===================================== */
+
+
+const semesterCourses = {
 
     "Semester 1": [
 
         ["BCC 101", "Introduction to Business"],
-
         ["BCC 102", "Basic Accounting"],
-
         ["BCC 103", "Business Mathematics"],
-
         ["BCC 104", "Principles of Management"],
-
         ["BCC 105", "Business Communication"]
 
     ],
@@ -38,13 +39,9 @@ const semesterCourses = {
     "Semester 2": [
 
         ["BCC 106", "Principles of Marketing"],
-
         ["BCC 107", "Microeconomics"],
-
         ["BCC 108", "Business Statistics"],
-
         ["BCC 109", "Business Law"],
-
         ["BCC 110", "Information Technology in Business"]
 
     ],
@@ -53,13 +50,9 @@ const semesterCourses = {
     "Semester 3": [
 
         ["BCC 201", "Business Finance"],
-
         ["BCC 202", "Human Resource Management"],
-
         ["BCC 203", "Principles of Banking"],
-
         ["BCC 204", "Macroeconomics"],
-
         ["BCC 205", "Theory and Practices of Taxation"]
 
     ],
@@ -68,17 +61,10 @@ const semesterCourses = {
     "Semester 4": [
 
         ["BCC 206", "Insurance and Risk Management"],
-
         ["BCC 207", "Business Ethics"],
-
         ["BCC 208", "Entrepreneurship Development"],
-
         ["BCC 209", "Organizational Behavior"],
-
-        [
-            "BCC 210",
-            "Bangladesh Studies and Economic Development"
-        ]
+        ["BCC 210", "Bangladesh Studies and Economic Development"]
 
     ],
 
@@ -86,13 +72,9 @@ const semesterCourses = {
     "Semester 5": [
 
         ["MGT 301", "Managerial Accounting"],
-
         ["MGT 302", "Seminars in Management"],
-
         ["MGT 303", "Service Management"],
-
         ["MGT 304", "Small Business Management"],
-
         ["MGT 305", "Management Information System"]
 
     ],
@@ -101,13 +83,9 @@ const semesterCourses = {
     "Semester 6": [
 
         ["MGT 306", "Operations Management"],
-
         ["MGT 307", "Managerial Economics"],
-
         ["MGT 308", "E-Business Management"],
-
         ["MGT 309", "Management of Change"],
-
         ["MGT 310", "Foreign Trade Management"]
 
     ],
@@ -116,13 +94,9 @@ const semesterCourses = {
     "Semester 7": [
 
         ["MGT 401", "Quality Management"],
-
         ["MGT 402", "Management Science"],
-
         ["MGT 403", "Leadership"],
-
         ["MGT 404", "Project Management"],
-
         ["MGT 405", "Business Environment"]
 
     ],
@@ -131,13 +105,9 @@ const semesterCourses = {
     "Semester 8": [
 
         ["MGT 406", "Supply Chain Management"],
-
         ["MGT 407", "Industrial Relations & Labor Law"],
-
         ["MGT 408", "Business Research Methods"],
-
         ["MGT 409", "Sustainability Management"],
-
         ["MGT 410", "Strategic Management"]
 
     ]
@@ -193,6 +163,42 @@ const resources = [
 
 
 /* =====================================
+   RESOURCE LINKS
+===================================== */
+
+/*
+   Add Google Drive links here later.
+
+   Format:
+
+   "Semester 1": {
+       "BCC 101": {
+           "Syllabus": "DRIVE LINK",
+           "Question": "DRIVE LINK"
+       }
+   }
+
+*/
+
+
+const resourceLinks = {
+
+    "Semester 1": {
+
+        "BCC 101": {
+
+            "Syllabus":
+                "https://drive.google.com/file/d/11NfxjVxTz0BQyoNCDpOLG7KOloxFJDbw/view"
+
+        }
+
+    }
+
+};
+
+
+
+/* =====================================
    PAGE NAVIGATION
 ===================================== */
 
@@ -242,8 +248,11 @@ function showPage(pageId) {
 
 
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
 
 }
@@ -258,7 +267,9 @@ function showPage(pageId) {
 function loadSemesters() {
 
     const list =
-        document.getElementById("semesterList");
+        document.getElementById(
+            "semesterList"
+        );
 
 
     if (!list) return;
@@ -267,50 +278,53 @@ function loadSemesters() {
     list.innerHTML = "";
 
 
-    semesters.forEach((semester, index) => {
+    semesters.forEach(
+        (semester, index) => {
 
-        const item =
-            document.createElement("div");
-
-
-        item.className = "list-item";
+            const item =
+                document.createElement("div");
 
 
-        item.onclick = () => {
-
-            openSemester(index);
-
-        };
+            item.className =
+                "list-item";
 
 
-        item.innerHTML = `
+            item.onclick = () => {
 
-            <div class="item-icon">
-                📁
-            </div>
+                openSemester(index);
 
-            <div class="item-content">
-
-                <h3>
-                    ${semester}
-                </h3>
-
-                <p>
-                    5 courses
-                </p>
-
-            </div>
-
-            <div class="arrow">
-                ›
-            </div>
-
-        `;
+            };
 
 
-        list.appendChild(item);
+            item.innerHTML = `
 
-    });
+                <div class="item-icon">
+                    📁
+                </div>
+
+                <div class="item-content">
+
+                    <h3>
+                        ${semester}
+                    </h3>
+
+                    <p>
+                        5 courses
+                    </p>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            `;
+
+
+            list.appendChild(item);
+
+        }
+    );
 
 }
 
@@ -328,12 +342,16 @@ function openSemester(index) {
 
 
     document
-        .getElementById("coursePageTitle")
+        .getElementById(
+            "coursePageTitle"
+        )
         .textContent = semester;
 
 
     const list =
-        document.getElementById("courseList");
+        document.getElementById(
+            "courseList"
+        );
 
 
     list.innerHTML = "";
@@ -348,6 +366,7 @@ function openSemester(index) {
         const courseCode =
             course[0];
 
+
         const courseName =
             course[1];
 
@@ -356,15 +375,20 @@ function openSemester(index) {
             document.createElement("div");
 
 
-        item.className = "list-item";
+        item.className =
+            "list-item";
 
 
         item.onclick = () => {
 
             openCourse(
+
                 semester,
+
                 courseCode,
+
                 courseName
+
             );
 
         };
@@ -412,14 +436,20 @@ function openSemester(index) {
 
 
 function openCourse(
+
     semester,
+
     courseCode,
+
     courseName
+
 ) {
 
 
     document
-        .getElementById("resourcePageTitle")
+        .getElementById(
+            "resourcePageTitle"
+        )
         .textContent = courseCode;
 
 
@@ -448,16 +478,22 @@ function openCourse(
             document.createElement("div");
 
 
-        item.className = "resource";
+        item.className =
+            "resource";
 
 
         item.onclick = () => {
 
             openResource(
+
                 semester,
+
                 courseCode,
+
                 courseName,
+
                 resource.name
+
             );
 
         };
@@ -466,8 +502,11 @@ function openCourse(
         item.innerHTML = `
 
             <div class="resource-icon">
+
                 ${resource.icon}
+
             </div>
+
 
             <div class="resource-text">
 
@@ -481,8 +520,11 @@ function openCourse(
 
             </div>
 
+
             <div class="resource-arrow">
+
                 ›
+
             </div>
 
         `;
@@ -504,22 +546,75 @@ function openCourse(
 ===================================== */
 
 
-function openResource(resourceName) {
+function openResource(
 
-    if (
-        currentSemester === "Semester 1" &&
-        currentCourseCode === "BCC 101" &&
-        resourceName === "Syllabus"
-    ) {
+    semester,
+
+    courseCode,
+
+    courseName,
+
+    resourceName
+
+) {
+
+
+    /*
+       Find the link for this resource.
+    */
+
+
+    const semesterData =
+        resourceLinks[semester];
+
+
+    const courseData =
+        semesterData
+            ? semesterData[courseCode]
+            : null;
+
+
+    const link =
+        courseData
+            ? courseData[resourceName]
+            : null;
+
+
+
+    /*
+       If a link exists,
+       open it.
+    */
+
+
+    if (link) {
+
         window.open(
-            "https://drive.google.com/file/d/11NfxjVxTz0BQyoNCDpOLG7KOloxFJDbw/view",
+            link,
             "_blank"
         );
+
         return;
+
     }
 
-    showToast(resourceName + " files will be connected soon");
+
+
+    /*
+       If no link exists yet,
+       show message.
+    */
+
+
+    showToast(
+
+        resourceName +
+        " files will be connected soon"
+
+    );
+
 }
+
 
 
 /* =====================================
@@ -560,7 +655,8 @@ function updateGreeting() {
 
     if (greeting) {
 
-        greeting.textContent = text;
+        greeting.textContent =
+            text;
 
     }
 
@@ -569,7 +665,7 @@ function updateGreeting() {
 
 
 /* =====================================
-   TOAST
+   TOAST MESSAGE
 ===================================== */
 
 
@@ -579,6 +675,9 @@ function showToast(message) {
         document.getElementById(
             "toast"
         );
+
+
+    if (!toast) return;
 
 
     toast.textContent =
